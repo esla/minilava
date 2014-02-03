@@ -1,0 +1,30 @@
+#!/usr/bin/python2.7
+
+import xmlrpclib
+from sys import argv
+
+server = xmlrpclib.ServerProxy("http://222.98.73.51/RPC2")
+types = server.scheduler.all_device_types()
+pending = server.scheduler.pending_jobs_by_device_type()
+
+
+if len(argv) > 1:
+    if argv[1] == "autoconf":
+        print("yes")
+        exit(0)
+
+    if argv[1] == "config":
+        print("graph_title LAVA pending per device-type")
+        print("graph_args --base 1000 -l 0")
+        print("graph_scale no")
+        print("graph_vlabel Number of pending jobs")
+        print("graph_category LAVA")
+        for dt in types:
+            print("lava_queue_%s.label lava_queue_%s" % (dt['name'],dt['name']))
+            print("lava_queue_%s.draw AREA"  % (dt['name']))
+            print("lava_queue_%s.warning 10"  % (dt['name']))
+            print("lava_queue_%s.critical 20"  % (dt['name']))
+        exit(0)
+
+for dt in types:
+    print("lava_queue_%s.value %s" % (dt['name'],pending[dt['name']]))
