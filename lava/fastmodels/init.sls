@@ -1,8 +1,8 @@
 # allows syncing of our ARM model simulators
 /opt/arm:
   url.sync_extract:
-    - url: file:/tmp/downloads/arm_models-2013-11-13.tgz
-    - md5sum: a5e7c5b5571e2e12975c41401e78f2f3
+    - url: file:~/Linaro/images/fastmodel/arm_models-2013-11-13.tgz
+    - md5sum: 79ef9d38ef3fe9ffa2646138842ce0f5
     - user: root
     - group: root
     - mode: 755

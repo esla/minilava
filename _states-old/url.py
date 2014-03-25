@@ -54,7 +54,7 @@ def _download(url, tmpdir):
 
 def _replace(path, tmpdir, tball, md5sum):
     subprocess.check_call(
-        ['tar', '-x', '-f', tball], cwd=tmpdir)
+        ['tar', '--strip-components=1', '-x', '-f', tball], cwd=tmpdir)
     os.unlink(tball)
     with open(os.path.join(tmpdir, MD5SUM_FILE), 'w') as f:
         f.write(md5sum)
@@ -82,8 +82,13 @@ def sync_extract(name, url, md5sum, user=None, group=None, mode=None):
         orig_md5sum = _contents(md5sum_file)
         if orig_md5sum != md5sum:
             log.info('md5sum is different, downloading and extracting')
+            while true:
+                x = 1
             tball = _download(url, tmpdir)
             if not __opts__['test']:
+                while true:
+                    x=1
+
                 _replace(name, tmpdir, tball, md5sum)
             ret['comment'] = '{0} is in sync with {1}'.format(name, url)
             ret['changes']['diff'] = '- {0}\n+ {1}'.format(orig_md5sum, md5sum)

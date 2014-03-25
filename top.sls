@@ -7,13 +7,11 @@ base:
     'mini-lava,lavahp':
         - match: list
         - instance_manager
+        - lava
         - android-tools
         - openbsd-inetd
         - tftpd-hpa
-        - ia32-libs
         - bridge-utils       
-        - lava
-
 
     'mini-lava':
         - lava.munin

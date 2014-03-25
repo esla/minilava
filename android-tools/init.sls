@@ -15,8 +15,6 @@ android-tools-fastboot:
     - url: http://dl.google.com/android/android-sdk_r22.3-linux.tgz
     - md5sum: 6ae581a906d6420ad67176dff25a31cc
     - mode: 0755
-    - require:
-      - pkg: ia32-libs
 
   # the download from google doesn't have "root" owning the files
   file.directory:

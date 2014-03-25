@@ -1,3 +1,3 @@
-ia32-libs:
+ia32-libs:i386:
   pkg:
     - latest
